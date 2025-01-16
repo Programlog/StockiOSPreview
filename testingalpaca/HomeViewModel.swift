@@ -60,13 +60,4 @@ class HomeViewModel: ObservableObject {
 
         isLoading = false
     }
-    
-    func appendStockIfNeeded(symbol: String, name: String) {
-        let alreadyExists = stocks.contains { $0.symbol == symbol }
-        guard !alreadyExists else { return }
-        
-        // Add a default price of 0.00; real price is fetched from your API
-        let newStock = Stock(symbol: symbol, companyName: name, currentPrice: 0.00)
-        stocks.insert(newStock, at: 0)
-    }
 }

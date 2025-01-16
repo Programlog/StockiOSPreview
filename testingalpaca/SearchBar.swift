@@ -1,3 +1,11 @@
+//
+//  SearchBar.swift
+//  testingalpaca
+//
+//  Created by Varun Kota on 1/15/25.
+import SwiftUI
+
+
 struct SearchBar: View {
     @Binding var text: String
     @Binding var suggestions: [SearchResult]
@@ -16,7 +24,7 @@ struct SearchBar: View {
                     
                     Task {
                         do {
-                            suggestions = try await NetworkManager.searchStocks(keyword: newValue)
+                            suggestions = try await StockDataService.searchStocks(keyword: newValue)
                             isSearching = true
                         } catch {
                             print("Search error: \(error)")

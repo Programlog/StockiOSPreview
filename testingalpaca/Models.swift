@@ -82,13 +82,9 @@ struct PredictionResponse: Codable, Identifiable, Equatable {
 }
 
 // Search
-struct SearchResult: Identifiable, Decodable, Equatable {
-    let id = UUID()
+struct SearchResult: Codable, Identifiable {
     let symbol: String
     let name: String
-}
-
-struct AutocompleteResponse: Decodable {
-    let results: [SearchResult]
-    let message: String
+    
+    var id: String { symbol }
 }

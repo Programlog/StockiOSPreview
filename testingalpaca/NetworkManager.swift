@@ -103,5 +103,16 @@ class StockDataService {
         
         return decoded
     }
+    
+    static func searchStocks(keyword: String) async throws -> [SearchResult] {
+            let urlString = "https://ticker-2e1ica8b9.now.sh/keyword/\(keyword)"
+            guard let url = URL(string: urlString) else {
+                throw URLError(.badURL)
+            }
+            
+            let (data, _) = try await URLSession.shared.data(from: url)
+            let results = try JSONDecoder().decode([SearchResult].self, from: data)
+            return results
+        }
 
 }
