@@ -10,9 +10,21 @@ import SwiftUI
 
 @main
 struct testingalpaca: App { // Replace `StockTrackerApp` with your app's name
+    @AppStorage("hasCompletedOnboarding") private var hasCompletedOnboarding: Bool = false
+    
+    
     var body: some Scene {
         WindowGroup {
-            HomeView()
+            NavigationStack {
+                Group {
+                    if hasCompletedOnboarding {
+                        HomeView()
+                    } else {
+                        SplashScreen()
+                    }
+                }
+                .animation(.easeInOut, value: hasCompletedOnboarding)
+            }
         }
     }
 }

@@ -57,7 +57,6 @@ class HomeViewModel: ObservableObject {
         } catch {
             self.errorMessage = error.localizedDescription
         }
-
         isLoading = false
     }
 }

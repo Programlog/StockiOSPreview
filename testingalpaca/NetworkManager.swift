@@ -1,7 +1,7 @@
 import Foundation
 
 class StockDataService {
-    private let baseURL = "http://127.0.0.1:5000" // Update if necessary
+    private let baseURL = "http://127.0.0.1:5000"
 
     func fetchStockData(symbol: String,
                         timeframe: String = "1Day",
@@ -27,7 +27,6 @@ class StockDataService {
 
         // Execute network request
         let (data, response) = try await URLSession.shared.data(from: url)
-
 
         // Check HTTP response code
         if let httpResponse = response as? HTTPURLResponse,
@@ -105,14 +104,12 @@ class StockDataService {
     }
     
     static func searchStocks(keyword: String) async throws -> [SearchResult] {
-            let urlString = "https://ticker-2e1ica8b9.now.sh/keyword/\(keyword)"
-            guard let url = URL(string: urlString) else {
-                throw URLError(.badURL)
-            }
-            
-            let (data, _) = try await URLSession.shared.data(from: url)
-            let results = try JSONDecoder().decode([SearchResult].self, from: data)
-            return results
+        let urlString = "https://ticker-2e1ica8b9.now.sh/keyword/\(keyword)"
+        guard let url = URL(string: urlString) else {
+            throw URLError(.badURL)
         }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return try JSONDecoder().decode([SearchResult].self, from: data)
+    }
 
 }
